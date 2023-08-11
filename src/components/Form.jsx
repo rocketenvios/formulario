@@ -59,7 +59,7 @@ export const Form = () => {
   return (
     <form action="">
       <Grid.Container gap={2}>
-        <Grid xs={7}>
+        <Grid xs={12} sm={7}>
           <Input
             label="Recibe: *"
             type="text"
@@ -69,7 +69,7 @@ export const Form = () => {
             value={data.name}
           />
         </Grid>
-        <Grid xs={5}>
+        <Grid xs={12} sm={5}>
           <Input
             label="Fecha *"
             type="date"
@@ -81,7 +81,7 @@ export const Form = () => {
             max={formatDate(1)}
           />
         </Grid>
-        <Grid xs={8}>
+        <Grid xs={12} sm={8}>
           <Input
             label="Dirección *"
             type="text"
@@ -91,7 +91,7 @@ export const Form = () => {
             value={data.direction}
           />
         </Grid>
-        <Grid xs={4}>
+        <Grid xs={12} sm={4}>
           <Input
             label="Barrio *"
             type="text"
@@ -101,7 +101,7 @@ export const Form = () => {
             value={data.zone}
           />
         </Grid>
-        <Grid xs={5}>
+        <Grid xs={12} sm={5}>
           <Input
             label="Whatsapp *"
             type="text"
@@ -112,7 +112,7 @@ export const Form = () => {
             minLength={8}
           />
         </Grid>
-        <Grid xs={4}>
+        <Grid xs={12} sm={4}>
           <Input
             label="Cobrar *"
             type="number"
@@ -122,7 +122,7 @@ export const Form = () => {
             value={data.pay}
           />
         </Grid>
-        <Grid xs={3}>
+        <Grid xs={12} sm={3}>
           <Input
             label="Paquetes *"
             type="number"
@@ -134,7 +134,7 @@ export const Form = () => {
             max={10}
           />
         </Grid>
-        <Grid xs={6}>
+        <Grid xs={12} sm={6}>
           <Input
             label="Desde hora *"
             type="time"
@@ -146,7 +146,7 @@ export const Form = () => {
             helperText="Min. 09:00"
           />
         </Grid>
-        <Grid xs={6}>
+        <Grid xs={12} sm={6}>
           <Input
             label="Hasta hora *"
             type="time"
@@ -158,7 +158,7 @@ export const Form = () => {
             helperText="Max. 18:00"
           />
         </Grid>
-        <Grid xs={12}>
+        <Grid xs={12} sm={12}>
           <Textarea
             placeholder="Si tienes algun detalle va acá.."
             minRows={4}
