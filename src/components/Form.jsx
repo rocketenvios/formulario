@@ -1,8 +1,15 @@
-import { Button, Grid, Input, Modal, Text, Textarea } from '@nextui-org/react';
+import {
+  Button,
+  Checkbox,
+  Grid,
+  Input,
+  Modal,
+  Text,
+  Textarea,
+} from '@nextui-org/react';
 import React, { useState } from 'react';
 import { checkData } from '../helpers/checkData';
 import { formatDate } from '../helpers/getFormatDate';
-import { getTime, isOnTime } from '../helpers/utilTime';
 import { generateLink } from '../helpers/generateLink';
 
 export const Form = () => {
@@ -22,27 +29,16 @@ export const Form = () => {
     whatsapp: '',
     pay: '',
     quantity: '',
-    initTime: '09:00',
-    finishTime: '18:00',
+    timeWindow: ['9hs - 13hs'],
     comments: '',
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    const isTime = name === 'initTime' || name === 'finishTime';
     const newData = { ...data };
 
-    if (
-      !isTime ||
-      (name === 'initTime' && isOnTime(value, 'min')) ||
-      (name === 'finishTime' && isOnTime(value, 'max'))
-    ) {
-      newData[name] = value;
-      setData(newData);
-    } else {
-      newData[name] = name === 'initTime' ? '09:00' : '18:00';
-      setData(newData);
-    }
+    newData[name] = value;
+    setData(newData);
   };
 
   const handleSubmit = () => {
@@ -54,6 +50,10 @@ export const Form = () => {
     } else {
       window.location = generateLink(data);
     }
+  };
+
+  const handleTimeWindow = (e) => {
+    setData({ ...data, timeWindow: e });
   };
 
   return (
@@ -134,29 +134,18 @@ export const Form = () => {
             max={10}
           />
         </Grid>
-        <Grid xs={12} sm={6}>
-          <Input
-            label="Desde hora *"
-            type="time"
-            name="initTime"
-            width="100%"
-            onChange={handleChange}
-            value={data.initTime}
-            min="09:00"
-            helperText="Min. 09:00"
-          />
-        </Grid>
-        <Grid xs={12} sm={6}>
-          <Input
-            label="Hasta hora *"
-            type="time"
-            name="finishTime"
-            width="100%"
-            onChange={handleChange}
-            value={data.finishTime}
-            max="18:00"
-            helperText="Max. 18:00"
-          />
+        <Grid xs={12} sm={12}>
+          <Checkbox.Group
+            color="primary"
+            label="Franja horaria disponible"
+            orientation="horizontal"
+            onChange={handleTimeWindow}
+            value={data.timeWindow}
+            name="timeWindow"
+          >
+            <Checkbox value="9hs - 13hs">9hs - 13hs</Checkbox>
+            <Checkbox value="13hs - 18hs">13hs - 18hs</Checkbox>
+          </Checkbox.Group>
         </Grid>
         <Grid xs={12} sm={12}>
           <Textarea
