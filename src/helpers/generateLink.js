@@ -1,10 +1,19 @@
 import { CONFIG } from '../util/config';
 
 export const generateLink = (data) => {
-  const { name, date, direction, zone, whatsapp, pay, quantity, comments } =
-    data;
+  const {
+    name,
+    date,
+    direction,
+    zone,
+    whatsapp,
+    quantity,
+    chargeDelivery,
+    comments,
+  } = data;
 
   const timeWindow = data.timeWindow.join(' | ');
+  const pay = chargeDelivery ? `$${data.pay} %2b ENVIO` : `$${data.pay}`;
 
   const whatsappDomain = 'https://api.whatsapp.com/send?phone=';
   const phone = CONFIG.phone;

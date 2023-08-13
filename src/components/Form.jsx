@@ -4,6 +4,7 @@ import {
   Grid,
   Input,
   Modal,
+  Radio,
   Text,
   Textarea,
 } from '@nextui-org/react';
@@ -30,6 +31,7 @@ export const Form = () => {
     pay: '',
     quantity: '',
     timeWindow: ['9hs - 13hs'],
+    chargeDelivery: true,
     comments: '',
   });
 
@@ -54,6 +56,10 @@ export const Form = () => {
 
   const handleTimeWindow = (e) => {
     setData({ ...data, timeWindow: e });
+  };
+
+  const handleChargeDelivery = (e) => {
+    setData({ ...data, chargeDelivery: e === 'yes' });
   };
 
   return (
@@ -112,16 +118,6 @@ export const Form = () => {
             minLength={8}
           />
         </Grid>
-        <Grid xs={12} sm={4}>
-          <Input
-            label="Cobrar *"
-            type="number"
-            name="pay"
-            width="100%"
-            onChange={handleChange}
-            value={data.pay}
-          />
-        </Grid>
         <Grid xs={12} sm={3}>
           <Input
             label="Paquetes *"
@@ -134,7 +130,32 @@ export const Form = () => {
             max={10}
           />
         </Grid>
-        <Grid xs={12} sm={12}>
+        <Grid xs={12} sm={4}>
+          <Input
+            label="Cobrar de producto *"
+            type="number"
+            name="pay"
+            width="100%"
+            onChange={handleChange}
+            value={data.pay}
+          />
+        </Grid>
+        <Grid xs={12} sm={6}>
+          <Radio.Group
+            label="Cobrar envío"
+            defaultValue="1"
+            size="sm"
+            orientation="horizontal"
+            name="chargeDelivery"
+            onChange={handleChargeDelivery}
+          >
+            <Radio value="yes" defaultChecked>
+              Si
+            </Radio>
+            <Radio value="no">No</Radio>
+          </Radio.Group>
+        </Grid>
+        <Grid xs={12} sm={6}>
           <Checkbox.Group
             color="primary"
             label="Franja horaria disponible"
@@ -142,6 +163,7 @@ export const Form = () => {
             onChange={handleTimeWindow}
             value={data.timeWindow}
             name="timeWindow"
+            size="sm"
           >
             <Checkbox value="9hs - 13hs">9hs - 13hs</Checkbox>
             <Checkbox value="13hs - 18hs">13hs - 18hs</Checkbox>
